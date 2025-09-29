@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Order - BabyZone</title>
+    <style>
+        :root {
+            --primary-color: #FF85C0;
+            --secondary-color: #FFD6E0;
+            --accent-color: #FFD700;
+            --text-color: #333;
+            --light-text: #666;
+            --white: #fff;
+            --gray: #f5f5f5;
+            --dark-gray: #ddd;
+            --black: #000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            background-color: var(--accent-color);
+            padding: 5px 0;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--white);
+            font-size: 24px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--white);
+            border: 1px solid var(--dark-gray);
+            border-radius: 25px;
+            padding: 5px 15px;
+            width: 300px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        .search-icon, .mic-icon {
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 5px 10px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .category-nav {
+            background-color: var(--primary-color);
+            padding: 10px 20px;
+            overflow-x: auto;
+        }
+
+        .category-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .category-item {
+            position: relative;
+        }
+
+        .category-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 5px 10px;
+            transition: color 0.3s;
+        }
+
+        .category-link:hover {
+            color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .order-tracking {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid var(--dark-gray);
+            border-radius: 8px;
+            background-color: var(--white);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--dark-gray);
+        }
+
+        .order-product {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .order-product-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            background-color: var(--gray);
+        }
+
+        .order-product-details {
+            flex: 1;
+        }
+
+        .order-product-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .order-product-price {
+            font-size: 14px;
+            color: var(--light-text);
+        }
+
+        .order-timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .timeline-date {
+            font-size: 14px;
+            color: var(--light-text);
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--dark-gray);
+            z-index: 0;
+        }
+
+        .timeline-item:last-child .timeline-line {
+            display: none;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--black);
+        }
+
+        .btn-primary:hover {
+            background-color: #e6c200;
+        }
+
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--text-color);
+            border: 1px solid var(--dark-gray);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .footer {
+            background-color: var(--primary-color);
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .footer-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--black);
+        }
+
+        @media (max-width: 768px) {
+            .main-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="top-bar">
+            Free Delivery Above $50 | 30 Days Return Policy
+        </div>
+        <div class="main-header">
+            <div class="logo">BZ</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products...">
+                <div class="search-icon">🔍</div>
+                <div class="mic-icon">🎤</div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="register.html" class="nav-link">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a href="cart.html" class="nav-link cart-icon">
+                        🛒
+                        <span class="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <nav class="category-nav">
+            <ul class="category-menu">
+                <li class="category-item">
+                    <a href="home.html" class="category-link">Home</a>
+                </li>
+                <li class="category-item">
+                    <a href="fashion.html" class="category-link">Baby Fashion</a>
+                </li>
+                <li class="category-item">
+                    <a href="toys.html" class="category-link">Toys</a>
+                </li>
+                <li class="category-item">
+                    <a href="footwear.html" class="category-link">Footwear & Accessories</a>
+                </li>
+                <li class="category-item">
+                    <a href="care.html" class="category-link">Moms & Baby Care</a>
+                </li>
+                <li class="category-item">
+                    <a href="furniture.html" class="category-link">Furniture & Bedding</a>
+                </li>
+                <li class="category-item">
+                    <a href="rental.html" class="category-link">Rental Services</a>
+                </li>
+                <li class="category-item">
+                    <a href="about.html" class="category-link">About</a>
+                </li>
+                <li class="category-item">
+                    <a href="contact.html" class="category-link">Contact</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1 class="cart-header">Track Your Order</h1>
+        
+        <div class="order-tracking">
+            <div class="order-header">
+                <div>
+                    <h2>Order #BZ-2023-001234</h2>
+                    <p>Placed on: Oct 15, 2023</p>
+                </div>
+                <div>
+                    <p>Total: $43.18</p>
+                    <p>Status: Shipped</p>
+                </div>
+            </div>
+            
+            <div class="order-product">
+                <div class="order-product-image"></div>
+                <div class="order-product-details">
+                    <div class="order-product-name">Cute Baby Romper</div>
+                    <div class="order-product-image"><img src="Baby products website/1318917a.jpg" alt="Cute Baby Romper" style="width:80px;height:80px;object-fit:cover;"></div>
+                    <div class="order-product-price">MRP: ₹1,299</div>
+                </div>
+            </div>
+            
+            <div class="order-product">
+                <div class="order-product-image"></div>
+                <div class="order-product-details">
+                    <div class="order-product-name">Colorful Stacking Rings</div>
+                    <div class="order-product-image"><img src="Baby products website/1318917c.jpg" alt="Colorful Stacking Rings" style="width:80px;height:80px;object-fit:cover;"></div>
+                    <div class="order-product-price">MRP: ₹499</div>
+                </div>
+            </div>
+            
+            <div class="order-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">✓</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Order Placed</div>
+                        <div class="timeline-date">Oct 15, 2023 - 10:30 AM</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">✓</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Order Confirmed</div>
+                        <div class="timeline-date">Oct 15, 2023 - 11:15 AM</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">✓</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Processing</div>
+                        <div class="timeline-date">Oct 16, 2023 - 9:00 AM</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">✓</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Shipped</div>
+                        <div class="timeline-date">Oct 16, 2023 - 2:30 PM</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">✓</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Out for Delivery</div>
+                        <div class="timeline-date">Oct 17, 2023 - 8:00 AM</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">✓</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Delivered</div>
+                        <div class="timeline-date">Oct 17, 2023 - 1:00 PM</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-primary">Download Invoice</button>
+                <button class="btn btn-secondary" style="margin-left: 10px;">Contact Support</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <div class="logo">BZ</div>
+                <p class="footer-address">
+                    123 Baby Street<br>
+                    Childville, CV 12345<br>
+                    Phone: (123) 456-7890<br>
+                    Email: info@babyzone.com
+                </p>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Quick Links</h3>
+                <a href="home.html" class="footer-link">Home</a>
+                <a href="about.html" class="footer-link">About Us</a>
+                <a href="contact.html" class="footer-link">Contact</a>
+                <a href="faq.html" class="footer-link">FAQ</a>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Categories</h3>
+                <a href="fashion.html" class="footer-link">Baby Fashion</a>
+                <a href="toys.html" class="footer-link">Toys</a>
+                <a href="footwear.html" class="footer-link">Footwear & Accessories</a>
+                <a href="care.html" class="footer-link">Moms & Baby Care</a>
+                <a href="furniture.html" class="footer-link">Furniture & Bedding</a>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Customer Service</h3>
+                <a href="track-order.html" class="footer-link">Track Order</a>
+                <a href="returns.html" class="footer-link">Returns</a>
+                <a href="shipping.html" class="footer-link">Shipping Info</a>
+                <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                <a href="terms.html" class="footer-link">Terms & Conditions</a>
+            </div>
+        </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Social Media</h3>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" title="Facebook" style="background: none;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="16" cy="16" r="16" fill="#3b5998"/>
+                            <path d="M21 16.5h-3v7h-3v-7h-2v-2.5h2v-1.5c0-2.1 1.2-3.5 3.3-3.5h2.7v2.5h-2c-.6 0-.7.2-.7.7v1.3h2.7L21 16.5z" fill="#fff"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" title="Instagram" style="background: none;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="16" cy="16" r="16" fill="#E4405F"/>
+                            <rect x="10" y="10" width="12" height="12" rx="4" fill="#fff"/>
+                            <circle cx="16" cy="16" r="3" fill="#E4405F"/>
+                            <circle cx="21" cy="11" r="1" fill="#E4405F"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" title="Twitter" style="background: none;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="16" cy="16" r="16" fill="#1da1f2"/>
+                            <path d="M24 13.1c-.5.2-1 .4-1.6.5.6-.4 1-1 1.2-1.7-.5.3-1.1.6-1.7.7-.5-.5-1.2-.9-2-0.9-1.5 0-2.6 1.4-2.3 2.8-2-.1-3.8-1-5-2.4-.2.4-.3.9-.3 1.3 0 1 .5 1.8 1.3 2.3-.5 0-.9-.2-1.3-.4v.1c0 1.4 1 2.5 2.3 2.8-.2.1-.5.1-.7.1-.2 0-.3 0-.5-.1.3 1 1.3 1.7 2.4 1.7-1 .8-2.2 1.3-3.5 1.3-.2 0-.4 0-.6-.1 1.2.8 2.6 1.3 4.1 1.3 4.9 0 7.6-4.1 7.6-7.6v-.3c.5-.3 1-.8 1.3-1.2z" fill="#fff"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" title="YouTube" style="background: none;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="16" cy="16" r="16" fill="#ff0000"/>
+                            <polygon points="13,11 23,16 13,21" fill="#fff"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+    </footer>
+
+    <script>
+        // Simple cart functionality
+        document.querySelectorAll('.btn-secondary').forEach(button => {
+            button.addEventListener('click', function() {
+                const countElement = document.querySelector('.cart-count');
+                let count = parseInt(countElement.textContent);
+                countElement.textContent = count + 1;
+                alert('Item added to cart!');
+            });
+        });
+    </script>
+
+    <script src="js/cart.js"></script>
+</body>
+</html>

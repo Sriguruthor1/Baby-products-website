@@ -1,0 +1,725 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+    
+                
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - BabyZone</title>
+    <style>
+        :root {
+            --primary-color: #FF85C0;
+            --secondary-color: #FFD6E0;
+            --accent-color: #FFD700;
+            --text-color: #333;
+            --light-text: #666;
+            --white: #fff;
+            --gray: #f5f5f5;
+            --dark-gray: #ddd;
+            --black: #000;
+            --pink: #FFB6D9;
+            --yellow: #FFD700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .promo-bar {
+            background-color: var(--yellow);
+            padding: 8px 0;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--white);
+            border: 1px solid var(--dark-gray);
+            border-radius: 25px;
+            padding: 5px 15px;
+            width: 300px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        .search-icon, .mic-icon {
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 5px 10px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .category-nav {
+            background-color: var(--pink);
+            padding: 10px 20px;
+            overflow-x: auto;
+        }
+
+        .category-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .category-item {
+            position: relative;
+        }
+
+        .category-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 5px 10px;
+            transition: color 0.3s;
+        }
+
+        .category-link:hover {
+            color: var(--white);
+        }
+
+        .category-link.dropdown::after {
+            content: ' ▾';
+            font-size: 12px;
+        }
+
+        .category-link.active {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: var(--light-text);
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            margin: 0 5px;
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-form {
+            flex: 2;
+            background-color: var(--pink);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .contact-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .contact-card {
+            background-color: var(--white);
+            border: 2px solid var(--dark-gray);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .contact-details {
+            flex: 1;
+        }
+
+        .contact-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .contact-value {
+            color: var(--text-color);
+        }
+
+        .live-chat-btn {
+            background-color: var(--yellow);
+            color: var(--black);
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--dark-gray);
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: var(--white);
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--dark-gray);
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: var(--white);
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--yellow);
+            color: var(--black);
+        }
+
+        .btn-primary:hover {
+            background-color: #e6c200;
+        }
+
+        .faq-section {
+            background-color: var(--pink);
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .faq-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border: 2px solid var(--dark-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 15px;
+            background-color: var(--white);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 15px;
+            background-color: var(--white);
+            display: none;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        .footer {
+            background-color: var(--pink);
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .footer-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--black);
+        }
+
+        @media (max-width: 768px) {
+            .main-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="promo-bar">
+            Get Rs:250 additional off on cart value of Rs:2999 and above
+        </div>
+        <div class="main-header">
+            <div class="logo">
+                <img src="img/IMG_20250821_174843_910-removebg-preview.png" alt="BabyZone Logo">
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search here...">
+                <div class="search-icon">🔍</div>
+                <div class="mic-icon">🎤</div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="home.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="forum.html" class="nav-link">Forum</a>
+                </li>
+                <li class="nav-item">
+                    <a href="parenting.html" class="nav-link">Parenting classes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Account ▾</a>
+                </li>
+                <li class="nav-item">
+                    <a href="cart.html" class="nav-link cart-icon">
+                        🛒
+                        <span class="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <nav class="category-nav">
+            <ul class="category-menu">
+                <li class="category-item">
+                    <a href="#" class="category-link">All categories ▾</a>
+                </li>
+                <li class="category-item">
+                    <a href="fashion.html" class="category-link">Baby fashion ▾</a>
+                </li>
+                <li class="category-item">
+                    <a href="toys.html" class="category-link">Toys</a>
+                </li>
+                <li class="category-item">
+                    <a href="footwear.html" class="category-link">Footwear & Accessories ▾</a>
+                </li>
+                <li class="category-item">
+                    <a href="care.html" class="category-link">Moms & Baby care ▾</a>
+                </li>
+                <li class="category-item">
+                    <a href="furniture.html" class="category-link">Furniture & Bedding ▾</a>
+                </li>
+                <li class="category-item">
+                    <a href="rental.html" class="category-link">Rental Services</a>
+                </li>
+                <li class="category-item">
+                    <a href="offers.html" class="category-link">Offers</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="home.html">Home</a> <span>/</span>
+            <a href="contact.html">Contact</a>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2 class="contact-title">Reach us</h2>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-details">
+                        <div class="contact-label">Phone</div>
+                        <div class="contact-value">+123-456-7890</div>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-details">
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">supporta@babyzone.com</div>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 18H8l-4-4h4v-4"></path>
+                            <path d="M16 18h4l4-4h-4v-4"></path>
+                            <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                        </svg>
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-label">Track order & Cancel order</div>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 18H8l-4-4h4v-4"></path>
+                            <path d="M16 18h4l4-4h-4v-4"></path>
+                            <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                        </svg>
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-label">Exchange and refund policy</div>
+                    </div>
+                </div>
+                
+                <div class="live-chat-btn">
+                    Live Chat
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h2 class="contact-title">Contact Form</h2>
+                
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-input" placeholder="Your Name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="Email Id" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" placeholder="Phone Number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Queries</label>
+                    <textarea class="form-textarea" placeholder="Your Message.." required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+        
+        <div class="faq-section">
+            <h2 class="faq-title">FAQ's</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Where are the offices of BabyZone located?</div>
+                <div class="faq-answer show">
+                    Currently our office is located in Madurai while the orders are shipped from our warehouses located across India.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I know my order has been confirmed?</div>
+                <div class="faq-answer show">
+                    After checking out during the payment process, you will get a confirmation that your payment has been processed successfully. You will also get a mail in your registered email id, along with an SMS to your registered mobile number confirming the order.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Are there any other hidden charges like Octroi or Entry tax?</div>
+                <div class="faq-answer show">
+                    You will get the final price during check out. Our prices are all inclusive and you need not pay anything extra.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How long will it take to receive my orders?</div>
+                <div class="faq-answer show">
+                    For all areas serviced by reputed couriers, the delivery time would be within 3 to 4 business days after dispatch (business days exclude Sundays and other holidays). However items weighing over 2 kilos may take a couple of days longer to reach. For other areas the products will be shipped through Indian Postal Service and may take 1-2 weeks depending on the location.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Will my GST amount be refunded on Order Cancellation and Returns?</div>
+                <div class="faq-answer show">
+                    Yes. GST amount collected will be returned to customer's source method at the time of Cancellation and Returns
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <div class="logo">
+                    <img src="img/IMG_20250821_174843_910-removebg-preview.png" alt="BabyZone Logo">
+                </div>
+                <p class="footer-address">
+                    4th street, pallavaram,<br>
+                    Near bus stand<br>
+                    Madurai-234567
+                </p>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Top categories</h3>
+                <a href="fashion.html" class="footer-link">Baby Fashion</a>
+                <a href="toys.html" class="footer-link">Toys</a>
+                <a href="footwear.html" class="footer-link">Footwear & Accessories</a>
+                <a href="care.html" class="footer-link">Moms & Baby care</a>
+                <a href="furniture.html" class="footer-link">Furniture & Bedding</a>
+                <a href="rental.html" class="footer-link">Rental services</a>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Customer support</h3>
+                <a href="help.html" class="footer-link">Help & contact us</a>
+                <a href="delivery.html" class="footer-link">Delivery information</a>
+                <a href="track.html" class="footer-link">Track your order</a>
+                <a href="returns.html" class="footer-link">Returns & exchange</a>
+                <a href="promotions.html" class="footer-link">Promotion Terms & conditions</a>
+                <a href="terms.html" class="footer-link">Terms & conditions</a>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Useful Links</h3>
+                <a href="store.html" class="footer-link">Store finder</a>
+                <a href="sitemap.html" class="footer-link">Sitemap</a>
+                <a href="fees.html" class="footer-link">Fees and payments policy</a>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">About BabyZone</h3>
+                <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                <a href="terms.html" class="footer-link">Terms & conditions</a>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Social Media</h3>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" title="Facebook" style="background: none;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="16" cy="16" r="16" fill="#3b5998"/>
+                            <path d="M21 16.5h-3v7h-3v-7h-2v-2.5h2v-1.5c0-2.1 1.2-3.5 3.3-3.5h2.7v2.5h-2c-.6 0-.7.2-.7.7v1.3h2.7L21 16.5z" fill="#fff"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" title="Instagram" style="background: none;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="16" cy="16" r="16" fill="#E4405F"/>
+                            <rect x="10" y="10" width="12" height="12" rx="4" fill="#fff"/>
+                            <circle cx="16" cy="16" r="3" fill="#E4405F"/>
+                            <circle cx="21" cy="11" r="1" fill="#E4405F"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" title="Twitter" style="background: none;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="16" cy="16" r="16" fill="#1da1f2"/>
+                            <path d="M24 13.1c-.5.2-1 .4-1.6.5.6-.4 1-1 1.2-1.7-.5.3-1.1.6-1.7.7-.5-.5-1.2-.9-2-0.9-1.5 0-2.6 1.4-2.3 2.8-2-.1-3.8-1-5-2.4-.2.4-.3.9-.3 1.3 0 1 .5 1.8 1.3 2.3-.5 0-.9-.2-1.3-.4v.1c0 1.4 1 2.5 2.3 2.8-.2.1-.5.1-.7.1-.2 0-.3 0-.5-.1.3 1 1.3 1.7 2.4 1.7-1 .8-2.2 1.3-3.5 1.3-.2 0-.4 0-.6-.1 1.2.8 2.6 1.3 4.1 1.3 4.9 0 7.6-4.1 7.6-7.6v-.3c.5-.3 1-.8 1.3-1.2z" fill="#fff"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" title="YouTube" style="background: none;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="16" cy="16" r="16" fill="#ff0000"/>
+                            <polygon points="13,11 23,16 13,21" fill="#fff"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                answer.classList.toggle('show');
+            });
+        });
+
+        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
+
+    <script src="js/cart.js"></script>
+</body>
+</html>
+
+
+    
+              <script>
+                              
+              </script>
+                        </body>
+                        </html>
+                    

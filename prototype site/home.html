@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabyZone - Baby Products Website & App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .header-top {
+            background-color: #FFD700;
+            padding: 8px 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #f9f9f9;
+            border-radius: 25px;
+            padding: 5px 15px;
+            width: 300px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        .search-bar button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .nav-links a.active {
+            color: #FF0000;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #FF0000;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .category-nav {
+            background-color: #FF69B4;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .category-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .category-nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            height: 400px;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(255,105,180,0.5) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .carousel-text {
+            max-width: 500px;
+        }
+
+        .carousel-text h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .carousel-text p {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #FFD700;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #FFC107;
+        }
+
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 10;
+        }
+
+        .carousel-control.prev {
+            left: 20px;
+        }
+
+        .carousel-control.next {
+            right: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .category-item {
+            text-align: center;
+            width: 150px;
+        }
+
+        .category-item img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #FF69B4;
+            margin-bottom: 10px;
+        }
+
+        .category-item p {
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .product-section {
+            padding: 40px 20px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .product-price {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .product-button {
+            background-color: #FFD700;
+            color: #333;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .product-button:hover {
+            background-color: #FFC107;
+        }
+
+        .brand-slider {
+            background-color: #FF69B4;
+            padding: 40px 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .brand-slider .section-title {
+            color: white;
+        }
+
+        .brand-logo {
+            display: inline-block;
+            margin: 0 20px;
+            width: 150px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .customer-reviews {
+            padding: 40px 20px;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .review-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .review-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 10px;
+        }
+
+        .review-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .review-stars {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .review-text {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .review-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .review-action {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .footer {
+            background-color: #FF69B4;
+            color: white;
+            padding: 40px 20px;
+        }
+
+        
+
+        .review-action {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .footer {
+            background-color: #FF69B4;
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: #666;
+        }
+
+        .view-more {
+            display: block;
+            margin: 20px auto;
+            background-color: #FFD700;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .view-more:hover {
+            background-color: #FFC107;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .category-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .carousel {
+                height: 300px;
+            }
+            
+            .carousel-text h2 {
+                font-size: 24px;
+            }
+            
+            .carousel-text p {
+                font-size: 18px;
+            }
+            
+            .categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-item {
+                width: 120px;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .brand-slider {
+            overflow: hidden;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        .brand-logos {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider-track {
+            display: flex;
+            width: max-content;
+            animation: scrollBrands 18s linear infinite;
+        }
+
+        .brand-logo {
+            height: 80px;
+            margin-right: 40px; /* Adjust spacing between logos */
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        @keyframes scrollBrands {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* Additional styles to match screenshot */
+        .header {
+            background-color: #FF69B4;
+            padding: 10px 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+        }
+        
+        .nav-links a.active {
+            color: #FFD700;
+        }
+        
+        .search-bar {
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+        
+        .search-bar input {
+            color: #333;
+        }
+        
+        .category-nav {
+            background-color: white;
+            padding: 15px 20px;
+        }
+        
+        .category-nav a {
+            color: #333;
+        }
+        
+        .category-nav a:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .carousel {
+            height: 300px;
+        }
+        
+        .carousel-item {
+            height: 300px;
+        }
+        
+        .product-section {
+            padding: 30px 20px;
+        }
+        
+        .product-card {
+            border: none;
+            box-shadow: none;
+            background-color: white;
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .top-selling {
+            background-color: #FF69B4;
+            padding: 30px 20px;
+        }
+        
+        .top-selling .product-card {
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+        
+        .brand-slider {
+            background-color: white;
+            padding: 30px 20px;
+        }
+        
+        .brand-slider .section-title {
+            color: #333;
+        }
+        
+        .customer-reviews {
+            background-color: #FF69B4;
+            padding: 30px 20px;
+        }
+        
+        .customer-reviews .review-card {
+            background-color: white;
+        }
+        
+        .footer {
+            background-color: white;
+            color: #333;
+            padding: 30px 20px;
+        }
+        
+        .footer-content {
+            gap: 20px;
+        }
+        
+        .footer-column h3 {
+            color: #FF69B4;
+        }
+        
+        .footer-column a {
+            color: #333;
+        }
+        
+        .social-icons {
+            gap: 10px;
+        }
+        
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #FF69B4;
+        }
+        
+        .social-icon:hover {
+            background-color: #FFD700;
+        }
+        
+        .view-more {
+            background-color: #FF69B4;
+            color: white;
+        }
+        
+        .view-more:hover {
+            background-color: #FFD700;
+            color: #333;
+        }
+        
+        /* Dropdown menu styles */
+        .dropdown-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-header {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .dropdown-header a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .dropdown-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 5px;
+            color: #333;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-top: none;
+            top: 100%;
+            left: 0;
+        }
+        
+        .dropdown-content.show {
+            display: block;
+        }
+        
+        .dropdown-content .column {
+            float: left;
+            width: 33.33%;
+            padding: 10px;
+        }
+        
+        .dropdown-content .column h3 {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .dropdown-content .column a {
+            display: block;
+            color: #333;
+            text-decoration: none;
+            padding: 5px 0;
+            font-size: 14px;
+        }
+        
+        .dropdown-content .column a:hover {
+            color: #FF69B4;
+        }
+        
+        .dropdown-content::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        
+        .category-nav .dropdown-container {
+            position: static;
+        }
+        
+        .category-nav .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            padding: 20px;
+            display: none;
+        }
+        
+        .category-nav .dropdown-content.show {
+            display: block;
+        }
+        
+        .category-nav .dropdown-content .column {
+            width: 20%;
+            padding: 10px;
+        }
+        
+        .category-nav .dropdown-content .column h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .category-nav .dropdown-content .column a {
+            font-size: 14px;
+            padding: 5px 0;
+        }
+        
+        .category-nav .dropdown-content::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Top -->
+    <div class="header-top">
+        Autumn winter 2023 is here! Dress your little one in soft, breathable fabrics for ultimate comfort and style!
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <img src="img/IMG_20250821_174843_910-removebg-preview.png" alt="BabyZone Logo" class="logo">
+        
+        <div class="search-bar">
+            <input type="text" placeholder="Search here">
+            <button>🔍</button>
+        </div>
+        
+        <nav class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="forum.html">Forum</a>
+            <a href="parenting.html">Parenting classes</a>
+            <div class="dropdown-container">
+                <div class="dropdown-header">
+                    <a href="login.html">Account</a>
+                    <button class="dropdown-toggle">▼</button>
+                </div>
+                <div class="dropdown-content">
+                    <div class="column">
+                        <h3>My Account</h3>
+                        <a href="#">Profile</a>
+                        <a href="#">Order History</a>
+                        <a href="#">Wishlist</a>
+                        <a href="#">Logout</a>
+                    </div>
+                    <div class="column">
+                        <h3>Help</h3>
+                        <a href="#">FAQ</a>
+                        <a href="#">Customer Support</a>
+                        <a href="#">Return Policy</a>
+                    </div>
+                </div>
+            </div>
+            <a href="cart.html" class="cart-icon">
+                Cart 🛒
+                <span class="cart-count">0</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Category Navigation -->
+    <nav class="category-nav">
+        <div class="dropdown-container all-categories-dropdown">
+            <div class="dropdown-header">
+                <a href="#">All categories</a>
+                <button class="dropdown-toggle all-categories-toggle">▼</button>
+            </div>
+            <div class="dropdown-content all-categories-content">
+                <div class="column">
+                    <h3>New Baby clothing</h3>
+                    <a href="#">New born onesies & rompers</a>
+                    <a href="#">New born nightwear & sleep suits</a>
+                    <a href="#">New born baby sets & suits</a>
+                    <a href="#">New born baby dresses & frocks</a>
+                    <a href="#">New born baby leggings & shorts</a>
+                    <a href="#">New born baby t-shirts</a>
+                    <a href="#">New born caps, gloves & mittens</a>
+                    <a href="#">New born inner wear</a>
+                    <a href="#">New born baby jackets</a>
+                    <a href="#">New born baby sweaters</a>
+                </div>
+                <div class="column">
+                    <h3>Baby boys clothing</h3>
+                    <a href="#">Baby boys t-shirts</a>
+                    <a href="#">Baby boys shirts</a>
+                    <a href="#">Baby boys jeans & trousers</a>
+                    <a href="#">Baby boys shorts</a>
+                    <a href="#">Baby boys innerwear & thermals</a>
+                    <a href="#">Baby boys socks</a>
+                    <a href="#">Baby boys sweat shirts & jackets</a>
+                    <a href="#">Baby boys swim wear</a>
+                    <a href="#">Baby boys sets & suits</a>
+                </div>
+                <div class="column">
+                    <h3>Baby girls clothing</h3>
+                    <a href="#">Baby girls tops & t-shirts</a>
+                    <a href="#">Baby girls dresses & frocks</a>
+                    <a href="#">Baby girls jeans & trousers</a>
+                    <a href="#">Baby girls leggings</a>
+                    <a href="#">Baby girls shorts & skirts</a>
+                    <a href="#">Baby girls sets & suits</a>
+                    <a href="#">Baby girls socks</a>
+                    <a href="#">Baby girls swim wear</a>
+                    <a href="#">Baby girls sweat shirts & jackets</a>
+                    <a href="#">Baby girls sweaters</a>
+                </div>
+                <div class="column">
+                    <h3>Baby Footwear</h3>
+                    <a href="#">Baby Booties</a>
+                    <a href="#">Kids casual shoes</a>
+                    <a href="#">Kids sneakers & sports shoes</a>
+                    <a href="#">Kids bellies</a>
+                    <a href="#">Kids sandals</a>
+                    <a href="#">Kids flip flops</a>
+                </div>
+                <div class="column">
+                    <h3>Fashion Accessories</h3>
+                    <a href="#">Kids bags</a>
+                    <a href="#">Kids hair accessories</a>
+                    <a href="#">Kids caps & gloves</a>
+                    <a href="#">Kids scarfs</a>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown-container">
+            <div class="dropdown-header">
+                <a href="fashion.html">Baby fashion</a>
+                <button class="dropdown-toggle">▼</button>
+            </div>
+            <div class="dropdown-content">
+                <div class="column">
+                    <h3>New Baby clothing</h3>
+                    <a href="#">New born onesies & rompers</a>
+                    <a href="#">New born nightwear & sleep suits</a>
+                    <a href="#">New born baby sets & suits</a>
+                    <a href="#">New born baby dresses & frocks</a>
+                    <a href="#">New born baby leggings & shorts</a>
+                    <a href="#">New born baby t-shirts</a>
+                    <a href="#">New born caps, gloves & mittens</a>
+                    <a href="#">New born inner wear</a>
+                    <a href="#">New born baby jackets</a>
+                    <a href="#">New born baby sweaters</a>
+                </div>
+                <div class="column">
+                    <h3>Baby boys clothing</h3>
+                    <a href="#">Baby boys t-shirts</a>
+                    <a href="#">Baby boys shirts</a>
+                    <a href="#">Baby boys jeans & trousers</a>
+                    <a href="#">Baby boys shorts</a>
+                    <a href="#">Baby boys innerwear & thermals</a>
+                    <a href="#">Baby boys socks</a>
+                    <a href="#">Baby boys sweat shirts & jackets</a>
+                    <a href="#">Baby boys swim wear</a>
+                    <a href="#">Baby boys sets & suits</a>
+                </div>
+                <div class="column">
+                    <h3>Baby girls clothing</h3>
+                    <a href="#">Baby girls tops & t-shirts</a>
+                    <a href="#">Baby girls dresses & frocks</a>
+                    <a href="#">Baby girls jeans & trousers</a>
+                    <a href="#">Baby girls leggings</a>
+                    <a href="#">Baby girls shorts & skirts</a>
+                    <a href="#">Baby girls sets & suits</a>
+                    <a href="#">Baby girls socks</a>
+                    <a href="#">Baby girls swim wear</a>
+                    <a href="#">Baby girls sweat shirts & jackets</a>
+                    <a href="#">Baby girls sweaters</a>
+                </div>
+            </div>
+        </div>
+        <a href="toys.html">Toys</a>
+        <div class="dropdown-container">
+            <div class="dropdown-header">
+                <a href="footwear.html">Footwear & Accessories</a>
+                <button class="dropdown-toggle">▼</button>
+            </div>
+            <div class="dropdown-content">
+                <div class="column">
+                    <h3>Baby Footwear</h3>
+                    <a href="#">Baby Booties</a>
+                </div>
+                <div class="column">
+                    <h3>Kids Footwear</h3>
+                    <a href="#">Kids casual shoes</a>
+                    <a href="#">Kids sneakers & sports shoes</a>
+                    <a href="#">Kids bellies</a>
+                    <a href="#">Kids sandals</a>
+                    <a href="#">Kids flip flops</a>
+                </div>
+                <div class="column">
+                    <h3>Fashion Accessories</h3>
+                    <a href="#">Kids bags</a>
+                    <a href="#">Kids hair accessories</a>
+                    <a href="#">Kids caps & gloves</a>
+                    <a href="#">Kids scarfs</a>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown-container">
+            <div class="dropdown-header">
+                <a href="care.html">Moms & Baby care</a>
+                <button class="dropdown-toggle">▼</button>
+            </div>
+            <div class="dropdown-content">
+                <div class="column">
+                    <h3>Breast Feeding</h3>
+                    <a href="#">Electric breast pump</a>
+                    <a href="#">Manual breast pump</a>
+                    <a href="#">Feeding shawls</a>
+                    <a href="#">Breast pads & nipple shields</a>
+                </div>
+                <div class="column">
+                    <h3>Maternity clothing</h3>
+                    <a href="#">Stretch mark cream</a>
+                    <a href="#">Maternity pads</a>
+                    <a href="#">Disposable maternity panties</a>
+                    <a href="#">Maternity bed mats</a>
+                </div>
+                <div class="column">
+                    <h3>Baby feeding & Nursery essentials</h3>
+                    <a href="#">Bibs & burp cloths</a>
+                    <a href="#">Feeding bottles</a>
+                    <a href="#">Muslins</a>
+                    <a href="#">Soothers & pacifiers</a>
+                    <a href="#">Teethers & nibblers</a>
+                    <a href="#">Baby food storage & milk storages</a>
+                    <a href="#">Baby sippers & cups</a>
+                    <a href="#">Weaning plates & bowls</a>
+                    <a href="#">Kids water bottles & lunch box</a>
+                    <a href="#">Bottle warmer & sterilizer</a>
+                </div>
+                <div class="column">
+                    <h3>Baby hair care</h3>
+                    <a href="#">Baby shampoo</a>
+                    <a href="#">Baby conditioner</a>
+                    <a href="#">Baby hair oil</a>
+                </div>
+                <div class="column">
+                    <h3>Baby grooming</h3>
+                    <a href="#">Baby toothbrush & baby toothpaste</a>
+                    <a href="#">Baby brush & comb</a>
+                    <a href="#">Baby nail cutter & scissors</a>
+                    <a href="#">Cotton buds & pleats</a>
+                </div>
+                <div class="column">
+                    <h3>Baby skincare</h3>
+                    <a href="#">Baby body oil & baby massage Oil</a>
+                    <a href="#">Baby body wash</a>
+                    <a href="#">Baby cream & baby lotion</a>
+                    <a href="#">Baby diaper rash cream</a>
+                    <a href="#">Baby powder</a>
+                    <a href="#">Baby wipes & tissues</a>
+                </div>
+                <div class="column">
+                    <h3>Health & Safety</h3>
+                    <a href="#">Baby care equipments</a>
+                    <a href="#">Detergent & cleansers</a>
+                    <a href="#">Humidifiers & air purifiers</a>
+                    <a href="#">Mosquito repellants</a>
+                    <a href="#">Sanitisers & hand cleansing gels</a>
+                    <a href="#">Thermometer</a>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown-container">
+            <div class="dropdown-header">
+                <a href="furniture.html">Furniture & Bedding</a>
+                <button class="dropdown-toggle">▼</button>
+            </div>
+            <div class="dropdown-content">
+                <div class="column">
+                    <h3>Baby Bedding</h3>
+                    <a href="#">Baby bedding sets</a>
+                    <a href="#">Baby cot sheets & crib sheets</a>
+                    <a href="#">Baby mattress</a>
+                    <a href="#">Baby mosquito nets</a>
+                    <a href="#">Baby pillows</a>
+                </div>
+                <div class="column">
+                    <h3>Baby furniture & storage</h3>
+                    <a href="#">Baby cots & cribs</a>
+                    <a href="#">Travel baby bed</a>
+                    <a href="#">Baby storage cabinets</a>
+                </div>
+                <div class="column">
+                    <h3>Blankets, quilts & wraps</h3>
+                    <a href="#">Baby blankets</a>
+                    <a href="#">Swaddles</a>
+                    <a href="#">Baby quilts & comforters</a>
+                    <a href="#">Sleeping bags</a>
+                </div>
+            </div>
+        </div>
+        <a href="rental.html">Rental Services</a>
+        <a href="#">Offers</a>
+    </nav>
+
+    <!-- Carousel -->
+    <section class="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item" style="background-image: url('img/two.png')">
+                <div class="carousel-overlay">
+                    <div class="carousel-text">
+                        <h2>Flat 30% Off</h2>
+                        <p>New launch</p>
+                        <a href="#" class="btn-primary">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('img/one.png')">
+                <div class="carousel-overlay">
+                    <div class="carousel-text">
+                        <h2>Special Offer</h2>
+                        <p>For limited time only</p>
+                        <a href="#" class="btn-primary">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <button class="carousel-control prev">‹</button>
+    <button class="carousel-control next">›</button>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="product-section">
+        <h2 class="section-title">Categories</h2>
+        <div class="categories">
+            <div class="category-item">
+                <img src="img/IMG_20250824_195106_608.jpg" alt="Boys Fashion">
+                <p>Boys fashion</p>
+            </div>
+            <div class="category-item">
+                <img src="img/IMG_20250824_195115_947.jpg" alt="Girls Fashion">
+                <p>Girls fashion</p>
+            </div>
+            <div class="category-item">
+                <img src="img/20682525a.webp" alt="Footwear">
+                <p>Footwear</p>
+            </div>
+            <div class="category-item">
+                <img src="img/IMG_20250824_195157_036.jpg" alt="Accessories">
+                <p>Accessories</p>
+            </div>
+            <div class="category-item">
+                <img src="img/IMG_20250824_195229_011.jpg" alt="Toys">
+                <p>Toys</p>
+            </div>
+            <div class="category-item">
+                <img src="img/IMG_20250824_195307_666.jpg" alt="Beds">
+                <p>Beds</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Arrivals -->
+    <section class="product-section">
+        <h2 class="section-title">New Arrivals</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="img/20913784a.webp" alt="Cotton Seersucker Frill Dress" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Cotton Seersucker Frill Dress</h3>
+                    <p class="product-price">MRP: ₹2,099</p>
+                    <a href="checkout.html" class="product-button" style="display:block;text-align:center;">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="img/20682525a.webp" alt="Cute Walk by Babyhug" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Cute Walk by Babyhug</h3>
+                    <p class="product-price">MRP: ₹936</p>
+                    <a href="checkout.html" class="product-button" style="display:block;text-align:center;">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="img/18108226a.webp" alt="Babyoye Disney" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Babyoye Disney</h3>
+                    <p class="product-price">MRP: ₹590</p>
+                    <a href="checkout.html" class="product-button" style="display:block;text-align:center;">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="img/11918372a.webp" alt="Bath Squeeze Toys" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Bath Squeeze Toys</h3>
+                    <p class="product-price">MRP: ₹237</p>
+                    <a href="checkout.html" class="product-button" style="display:block;text-align:center;">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="img/9356371a.webp" alt="Advanced Pant Style Diapers" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Advanced Pant Style Diapers Extra Large (XL)</h3>
+                    <p class="product-price">MRP: ₹1,185</p>
+                    <a href="checkout.html" class="product-button" style="display:block;text-align:center;">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="img/1773877a.webp" alt="Comfy Ride Stroller" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Comfy Ride Stroller With Reversible Handle</h3>
+                    <p class="product-price">MRP: ₹3,180</p>
+                    <a href="checkout.html" class="product-button" style="display:block;text-align:center;">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="img/14530273a.webp" alt="Runway Cabin Stroller" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Runway Cabin Stroller in Linen Fabric</h3>
+                    <p class="product-price">MRP: ₹9,730</p>
+                    <a href="checkout.html" class="product-button" style="display:block;text-align:center;">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="img/700003a.webp" alt="Cocoon Stroller" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Cocoon Stroller Mosquito Net & Reversible Handle</h3>
+                    <a href="checkout.html" class="product-button" style="display:block;text-align:center;">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Selling -->
+    <section class="top-selling">
+        <h2 class="section-title">Top selling</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="img/700003a.webp" alt="Cocoon Stroller" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Cocoon Stroller Mosquito Net & Reversible Handle</h3>
+                    <a href="#" class="btn-primary">Shop Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="img/1773877a.webp" alt="Comfy Ride Stroller" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Comfy Ride Stroller With Reversible Handle</h3>
+                    <a href="#" class="btn-primary">Shop Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="img/20682525a.webp" alt="Cute Walk by Babyhug" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Cute Walk by Babyhug</h3>
+                    <a href="#" class="btn-primary">Shop Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="img/10422689a.webp" alt="My Fun Dough Jumbo" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">My Fun Dough Jumbo Return Gift Set Tub</h3>
+                    <a href="#" class="btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Brands -->
+    <section class="brand-slider">
+        <h2 class="section-title">Top Brands</h2>
+        <div class="brand-logos">
+            <div class="slider-track">
+                <img src="img/images (6).png" alt="KIDLON" class="brand-logo">
+                <img src="img/ffs.jpg" alt="Fancy Fluff" class="brand-logo">
+                <img src="img/Johnsons-Baby-Company-Logo.jpg" alt="Johnson's baby" class="brand-logo">
+                <img src="img/images.png" alt="Pampers" class="brand-logo">
+                <img src="img/Baby-Product-Manufacturers-logo-8-1024x301.webp" alt="Babyking" class="brand-logo">
+
+                <!-- Duplicate set for infinite loop -->
+                <img src="img/images (6).png" alt="KIDLON" class="brand-logo">
+                <img src="img/ffs.jpg" alt="Fancy Fluff" class="brand-logo">
+                <img src="img/Johnsons-Baby-Company-Logo.jpg" alt="Johnson's baby" class="brand-logo">
+                <img src="img/images.png" alt="Pampers" class="brand-logo">
+                <img src="img/Baby-Product-Manufacturers-logo-8-1024x301.webp" alt="Babyking" class="brand-logo">
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews -->
+    <section class="customer-reviews">
+        <h2 class="section-title">Our happy customer</h2>
+        <div class="review-grid">
+            <div class="review-card">
+                <img src="img/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg" alt="Bosky" class="review-avatar">
+                <h3 class="review-name">Bosky</h3>
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">Very fast service and products are genuine..Definitely I am satisfied !</p>
+                <div class="review-actions">
+                    <div class="review-action">
+                        <span>👎</span>
+                        <span>0</span>
+                    </div>
+                    <div class="review-action">
+                        <span>👍</span>
+                        <span>5</span>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <img src="img/4e22beef6d94640c45a1b15f4a158b23.jpg" alt="Tulip" class="review-avatar">
+                <h3 class="review-name">Tulip</h3>
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">Amazing products. Reasonable prices. Gr8 customer service. Cheers !!!!!</p>
+                <div class="review-actions">
+                    <div class="review-action">
+                        <span>👎</span>
+                        <span>0</span>
+                    </div>
+                    <div class="review-action">
+                        <span>👍</span>
+                        <span>5</span>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <img src="img/beautiful-woman-avatar-character-icon-free-vector.jpg" alt="Deepa" class="review-avatar">
+                <h3 class="review-name">Deepa</h3>
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">Great range of products right from new-born essentials ... Excellent product quality and delivery</p>
+                <div class="review-actions">
+                    <div class="review-action">
+                        <span>👎</span>
+                        <span>0</span>
+                    </div>
+                    <div class="review-action">
+                        <span>👍</span>
+                        <span>5</span>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <img src="img/thumb-1920-375571.png" alt="Moshin" class="review-avatar">
+                <h3 class="review-name">Moshin</h3>
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">Great site for baby product, i m shopping here since 2012. The quality of product and services is never changed. Keep it up</p>
+                <div class="review-actions">
+                    <div class="review-action">
+                        <span>👎</span>
+                        <span>0</span>
+                    </div>
+                    <div class="review-action">
+                        <span>👍</span>
+                        <span>5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="view-more">View More</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <img src="img/IMG_20250821_174843_910-removebg-preview.png" alt="BabyZone Logo" class="logo">
+                <p>4th street, pallavaram,<br>Near bus stand<br>Madurai-234567</p>
+            </div>
+            <div class="footer-column">
+                <h3>Top categories</h3>
+                <ul>
+                    <li><a href="fashion.html">Baby Fashion</a></li>
+                    <li><a href="toys.html">Toys</a></li>
+                    <li><a href="footwear.html">Footwear & Accessories</a></li>
+                    <li><a href="care.html">Moms & Baby care</a></li>
+                    <li><a href="furniture.html">Furniture & Bedding</a></li>
+                    <li><a href="rental.html">Rental services</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer support</h3>
+                <ul>
+                    <li><a href="contact.html">Help & contact us</a></li>
+                    <li><a href="#">Delivery information</a></li>
+                    <li><a href="track-order.html">Track your order</a></li>
+                    <li><a href="#">Returns & exchange</a></li>
+                    <li><a href="#">Promotion Terms & conditions</a></li>
+                    <li><a href="#">Terms & conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li><a href="#">Store finder</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                    <li><a href="#">Fees and payments policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>About BabyZone</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Social Media</h3>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" style="background-color:#3b5998;" title="Facebook">
+                        <svg width="20" height="20" viewBox="0 0 32 32"><path fill="#fff" d="M22.3 20.7l.7-4.7h-4.4v-2.5c0-1.3.6-2.5 2.6-2.5h2v-3.8s-1.8-.3-3.5-.3c-3.6 0-6 2.2-6 6.2V16h-4v4.7h4v11.2c.8.1 1.6.2 2.5.2s1.7-.1 2.5-.2V20.7h3.7z"/><path fill="#1877F3" d="M32 16.1C32 7.2 24.8 0 16 0S0 7.2 0 16.1c0 8 5.8 14.6 13.3 15.8v-11.2h-4V16h4v-2.6c0-4 2.4-6.2 6-6.2c1.7 0 3.5.3 3.5.3v3.8h-2c-2 0-2.6 1.2-2.6 2.5V16h4.4l-.7 4.7h-3.7z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" style="background-color:#e4405f;" title="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 448 512"><path fill="#fff" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9 114.9-51.3 114.9-114.9S287.7 141 224.1 141zm0 186c-39.5 0-71.5-32-71.5-71.5s32-71.5 71.5-71.5 71.5 32 71.5 71.5-32 71.5-71.5 71.5zm146.4-194.3c0 14.9-12 26.9-26.9 26.9s-26.9-12-26.9-26.9 12-26.9 26.9-26.9 26.9 12 26.9 26.9zm76.1 27.2c-1.7-35.3-9.9-66.7-36.2-92.1C385.6 9.9 354.2 1.7 318.9 0 283.2-1.7 256.8-1.7 221.1 0c-35.3 1.7-66.7 9.9-92.1 36.2C9.9 62.4 1.7 93.8 0 129.1c-1.7 35.7-1.7 62.1 0 97.8 1.7 35.3 9.9 66.7 36.2 92.1 26.4 26.4 57.8 34.6 93.1 36.3 35.7 1.7 62.1 1.7 97.8 0 35.3-1.7 66.7-9.9 92.1-36.2 26.4-26.4 34.6-57.8 36.3-93.1 1.7-35.7 1.7-62.1 0-97.8zm-48.6 218.2c-7.8 19.6-22.9 34.7-42.5 42.5-29.4 11.7-99.2 9-132.4 9s-103 .7-132.4-9c-19.6-7.8-34.7-22.9-42.5-42.5-11.7-29.4-9-99.2-9-132.4s-.7-103 9-132.4c7.8-19.6 22.9-34.7 42.5-42.5C118.1 9.7 187.9 12.4 221.1 12.4s103-.7 132.4 9c19.6 7.8 34.7 22.9 42.5 42.5 11.7 29.4 9 99.2 9 132.4s.7 103-9 132.4z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" style="background-color:#1da1f2;" title="Twitter">
+                        <svg width="20" height="20" viewBox="0 0 512 512"><path fill="#fff" d="M459.4 151.7c.3 4.1.3 8.2.3 12.3 0 125-95.2 269.2-269.2 269.2-53.6 0-103.5-15.7-145.4-42.7 7.4.9 14.8 1.2 17.7 1.2 44.4 0 85.3-15.1 117.8-40.8-41.6-.9-76.5-28.1-88.5-65.6 5.8.9 11.6 1.8 17.7 1.8 8.5 0 16.9-1.2 24.8-3.3-43.4-8.5-76-46.9-76-92.5v-1.2c12.7 7.1 27.3 11.6 42.8 12.1-25.4-17-42.1-45.7-42.1-78.3 0-17.4 4.7-33.7 13.1-47.7 47.8 58.7 119.3 97.2 199.9 101.3-1.5-7-2.3-14.3-2.3-21.7 0-52.6 42.7-95.3 95.3-95.3 27.4 0 52.2 11.6 69.6 30.2 21.7-4.1 42.1-12.1 60.5-23.1-7.1 22.3-28.6 41-42.1 52.6 19.3-2.3 37.7-7.4 54.8-15-12.7 19.1-28.6 36-46.9 49.3z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" style="background-color:#ff0000;" title="YouTube">
+                        <svg width="20" height="20" viewBox="0 0 576 512"><path fill="#fff" d="M549.7 124.1c-6.3-24-25.1-42.7-49.1-49.1C458.5 64 288 64 288 64s-170.5 0-212.6 10.9c-24 6.3-42.7 25.1-49.1 49.1C16 166.2 16 256 16 256s0 89.8 10.9 131.9c6.3 24 25.1 42.7 49.1 49.1C117.5 448 288 448 288 448s170.5 0 212.6-10.9c24-6.3 42.7-25.1 49.1-49.1C560 345.8 560 256 560 256s0-89.8-10.3-131.9zM232 336V176l142.7 80L232 336z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const carouselInner = document.querySelector('.carousel-inner');
+            const prevButton = document.querySelector('.carousel-control.prev');
+            const nextButton = document.querySelector('.carousel-control.next');
+            let currentIndex = 0;
+            const items = document.querySelectorAll('.carousel-item');
+            const totalItems = items.length;
+
+            function updateCarousel() {
+                carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+
+            prevButton.addEventListener('click', function() {
+                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                updateCarousel();
+            });
+
+            nextButton.addEventListener('click', function() {
+                currentIndex = (currentIndex + 1) % totalItems;
+                updateCarousel();
+            });
+
+            // Auto slide every 5 seconds
+            setInterval(function() {
+                currentIndex = (currentIndex + 1) % totalItems;
+                updateCarousel();
+            }, 5000);
+
+            // Add hover effect to product cards
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Add click effect to buttons
+            const buttons = document.querySelectorAll('.product-button, .btn-primary, .view-more');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.backgroundColor = '#FFC107';
+                    setTimeout(() => {
+                        this.style.backgroundColor = '#FFD700';
+                    }, 200);
+                });
+            });
+
+            // Add hover effect to category items
+            const categoryItems = document.querySelectorAll('.category-item');
+            categoryItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                });
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+
+            // Add hover effect to brand logos
+            const brandLogos = document.querySelectorAll('.brand-logo');
+            brandLogos.forEach(logo => {
+                logo.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.1)';
+                });
+                logo.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+
+            // Add hover effect to review cards
+            const reviewCards = document.querySelectorAll('.review-card');
+            reviewCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                    this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
+                });
+            });
+
+            // Add click effect to social icons
+            const socialIcons = document.querySelectorAll('.social-icon');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('click', function() {
+                    this.style.backgroundColor = '#666';
+                    setTimeout(() => {
+                        this.style.backgroundColor = '#333';
+                    }, 200);
+                });
+            });
+
+            // Add cart functionality
+            const cartIcon = document.querySelector('.cart-icon');
+            let cartCount = 0;
+            cartIcon.addEventListener('click', function() {
+                cartCount++;
+                document.querySelector('.cart-count').textContent = cartCount;
+                alert(`Added to cart! Total items: ${cartCount}`);
+            });
+
+            // Add search functionality
+            const searchInput = document.querySelector('.search-bar input');
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    alert(`Searching for: ${this.value}`);
+                }
+            });
+
+            // Add navigation link highlighting
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Fix: Only allow one dropdown open at a time, and handle 'All categories' separately for robustness
+            const dropdownContainers = document.querySelectorAll('.dropdown-container');
+
+            dropdownContainers.forEach(container => {
+                const toggleButton = container.querySelector('.dropdown-toggle');
+                const dropdownContent = container.querySelector('.dropdown-content');
+
+                if (toggleButton && dropdownContent) {
+                    toggleButton.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        // Close all other dropdowns
+                        dropdownContainers.forEach(otherContainer => {
+                            if (otherContainer !== container) {
+                                const otherContent = otherContainer.querySelector('.dropdown-content');
+                                if (otherContent && otherContent.classList.contains('show')) {
+                                    otherContent.classList.remove('show');
+                                }
+                            }
+                        });
+
+                        // Toggle this dropdown
+                        dropdownContent.classList.toggle('show');
+                    });
+                }
+            });
+
+            // Close all dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.dropdown-container')) {
+                    dropdownContainers.forEach(container => {
+                        const dropdownContent = container.querySelector('.dropdown-content');
+                        if (dropdownContent && dropdownContent.classList.contains('show')) {
+                            dropdownContent.classList.remove('show');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script src="js/cart.js"></script>
+</body>
+</html>
+
+
+    
+              <script>
+                              
+              </script>
+                        </body>
+                        </html>

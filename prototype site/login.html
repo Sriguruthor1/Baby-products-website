@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BabyZone</title>
+    <style>
+        :root {
+            --primary-color: #FF85C0;
+            --secondary-color: #FFD6E0;
+            --accent-color: #FFD700;
+            --text-color: #333;
+            --light-text: #666;
+            --white: #fff;
+            --gray: #f5f5f5;
+            --dark-gray: #ddd;
+            --black: #000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-color);
+            line-height: 1.6;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-container {
+            max-width: 800px;
+            width: 100%;
+            margin: 20px;
+            padding: 30px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .auth-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .auth-form {
+            display: flex;
+            gap: 30px;
+        }
+
+        .auth-image {
+            flex: 0 0 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-image-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .auth-fields {
+            flex: 1;
+        }
+
+        .form-field {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--dark-gray);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .auth-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--accent-color);
+            color: var(--black);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .auth-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .auth-links p {
+            margin-bottom: 10px;
+        }
+
+        .auth-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background-color: var(--dark-gray);
+        }
+
+        .divider-text {
+            margin: 0 10px;
+            font-size: 14px;
+            color: var(--light-text);
+        }
+
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px;
+            border: 1px solid var(--dark-gray);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .social-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .social-icon-google {
+            width: 20px;
+            height: 20px;
+            background-color: #4285F4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 14px;
+        }
+
+        .social-icon-facebook {
+            width: 20px;
+            height: 20px;
+            background-color: #3b5998;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .auth-form {
+                flex-direction: column;
+            }
+
+            .auth-image {
+                flex: 0 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1 class="auth-title">Login to Your Account</h1>
+            <a href="home.html" class="close-btn">×</a>
+        </div>
+        <div class="auth-form">
+            <div class="auth-image">
+                <img src="img/200-Hot-Boy-Names-That-Youll-Love_514658236-768x525.webp" alt="Login Image" class="auth-image-placeholder">
+            </div>
+            <div class="auth-fields">
+                <div class="form-field">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="Enter your email">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Password</label>
+                    <div class="password-toggle">
+                        <input type="password" class="form-input" placeholder="Enter your password">
+                        <span class="toggle-password">👁️</span>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <input type="checkbox">
+                    <label>Remember me</label>
+                </div>
+                <div class="auth-actions">
+                    <button class="auth-btn">Login</button>
+                </div>
+                <div class="auth-links">
+                    <p><a href="#" class="auth-link">Forgot Password?</a></p>
+                    <p>Don't have an account? <a href="register.html" class="auth-link">Register</a></p>
+                </div>
+                <div class="auth-divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-text">OR</div>
+                    <div class="divider-line"></div>
+                </div>
+                <div class="social-login">
+                    <button class="social-btn">
+                        <span class="social-icon-google" style="display:flex;align-items:center;justify-content:center;width:20px;height:20px;">
+                            <svg width="20" height="20" viewBox="0 0 48 48"><g><path fill="#4285F4" d="M44.5 20H24v8.5h11.7C34.7 33.1 30.1 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c2.7 0 5.2.9 7.2 2.5l6.4-6.4C34.1 5.1 29.3 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.5 0 20-7.6 20-21 0-1.3-.1-2.7-.3-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15.5 16.1 19.4 13 24 13c2.7 0 5.2.9 7.2 2.5l6.4-6.4C34.1 5.1 29.3 3 24 3c-7.2 0-13.4 4.1-16.7 10.1z"/><path fill="#FBBC05" d="M24 45c5.3 0 10.1-1.8 13.8-4.9l-6.4-5.2C29.2 36.1 26.7 37 24 37c-6.1 0-10.7-3.9-12.5-9.1l-7 5.4C6.6 41.1 14.6 45 24 45z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.7c-1.1 3.1-4.2 7.5-11.7 7.5-7.1 0-13-5.9-13-13s5.9-13 13-13c3.1 0 6 .9 8.2 2.7l6.2-6.2C36.1 5.1 30.3 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.5 0 20-7.6 20-21 0-1.3-.1-2.7-.3-4z"/></g></svg>
+                        </span>
+                        Continue with Google
+                    </button>
+                    <button class="social-btn">
+                        <span class="social-icon-facebook" style="display:flex;align-items:center;justify-content:center;width:20px;height:20px;">
+                            <svg width="20" height="20" viewBox="0 0 32 32"><path fill="#1877F3" d="M32 16.1C32 7.2 24.8 0 16 0S0 7.2 0 16.1c0 8 5.8 14.6 13.3 15.8v-11.2h-4V16h4v-2.6c0-4 2.4-6.2 6-6.2c1.7 0 3.5.3 3.5.3v3.8h-2c-2 0-2.6 1.2-2.6 2.5V16h4.4l-.7 4.7h-3.7v11.2C26.2 30.7 32 24.1 32 16.1z"/><path fill="#fff" d="M22.3 20.7l.7-4.7h-4.4v-2.5c0-1.3.6-2.5 2.6-2.5h2v-3.8s-1.8-.3-3.5-.3c-3.6 0-6 2.2-6 6.2V16h-4v4.7h4v11.2c.8.1 1.6.2 2.5.2s1.7-.1 2.5-.2V20.7h3.7z"/></svg>
+                        </span>
+                        Continue with Facebook
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Login logic
+    document.querySelector('.auth-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const fields = document.querySelectorAll('.auth-fields .form-input');
+        const email = fields[0].value.trim().toLowerCase();
+        const password = fields[1].value;
+        if (!email || !password) {
+            alert('Please enter email and password.'); return;
+        }
+        let users = JSON.parse(localStorage.getItem('site_users_v1') || '[]');
+        const user = users.find(u => u.email === email && u.password === password);
+        if (!user) {
+            alert('Invalid email or password.'); return;
+        }
+        // Save session
+        localStorage.setItem('site_user_session', JSON.stringify({ email: user.email, name: user.name }));
+        alert('Login successful!');
+        window.location.href = 'home.html';
+    });
+
+    // Password show/hide
+    document.querySelectorAll('.toggle-password').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            input.type = input.type === 'password' ? 'text' : 'password';
+        });
+    });
+
+    document.querySelector('.close-btn').addEventListener('click', function() {
+        window.location.href = 'home.html';
+    });
+    </script>
+
+    <script src="js/cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabyZone Parenting Classes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #FFB6D9;
+            --accent-yellow: #FFD700;
+            --border-color: #EAEAEA;
+            --card-border-color: #E0E0E0;
+            --background-white: #FFFFFF;
+            --page-background: #FFFFFF;
+            --text-dark: #333333;
+            --text-light: #555555;
+            --footer-pink: #FFEBF4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--page-background);
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        button, .btn {
+            cursor: pointer;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        button:hover, .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* --- Header --- */
+        .header-top { background-color: var(--accent-yellow); padding: 10px 20px; text-align: center; font-size: 14px; font-weight: 500; }
+        .header-main { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background-color: var(--background-white); border-bottom: 1px solid var(--border-color); }
+        .header-main .logo { width: 50px; height: 50px; }
+        .search-bar { display: flex; align-items: center; border: 1px solid var(--border-color); border-radius: 50px; padding: 4px 8px 4px 15px; width: 350px; }
+        .search-bar input { flex: 1; border: none; background: transparent; padding: 8px; font-size: 14px; outline: none; }
+        .search-bar img { width: 20px; height: 20px; }
+        .search-bar .mic-icon { margin-left: 8px; cursor: pointer;}
+        .nav-links { display: flex; gap: 25px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 15px; }
+        .nav-links a.active { color: var(--primary-pink); font-weight: 600; }
+        .cart-icon-wrapper { position: relative; }
+        .cart-count { position: absolute; top: -8px; right: -12px; background-color: #E74C3C; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; }
+        .category-nav { background-color: var(--primary-pink); padding: 12px 20px; display: flex; justify-content: center; gap: 30px; }
+        .category-nav a { color: var(--text-dark); text-decoration: none; font-weight: 500; font-size: 15px; }
+
+        /* --- Main Content --- */
+        .main-content { padding: 20px 0; }
+        .breadcrumbs { color: var(--text-light); margin-bottom: 25px; font-size: 15px; }
+        
+        .carousel-section {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+        }
+
+        .carousel-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding-bottom: 10px; /* For shadow visibility */
+        }
+        
+        .class-card, .workshop-card {
+            flex: 0 0 285px; /* Fixed width for cards */
+            background: var(--background-white);
+            border: 1px solid var(--card-border-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            overflow: hidden;
+        }
+
+        .class-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+        
+        .class-card-content {
+            padding: 15px;
+        }
+
+        .class-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .class-card-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .duration-tag {
+            background-color: #E8F8F5;
+            color: #1ABC9C;
+            border-radius: 5px;
+            padding: 3px 8px;
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .class-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin: 8px 0 15px 0;
+        }
+
+        .btn-join-class {
+            background: var(--accent-yellow);
+            color: var(--text-dark);
+            padding: 10px 0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        .workshop-card {
+            padding: 20px;
+            text-align: center; /* Center align workshop content */
+        }
+        .workshop-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .workshop-card h3 {
+             font-size: 18px;
+            font-weight: 600;
+        }
+        .workshop-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+        .workshop-card p.time {
+            margin-bottom: 15px;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 35px;
+            background-color: var(--background-white);
+            border: 1px solid var(--card-border-color);
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .prev-btn { left: -18px; }
+        .next-btn { right: -18px; }
+        
+        .promo-banner {
+            background-color: var(--primary-pink);
+            padding: 30px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .promo-banner-text {
+             font-size: 20px;
+            font-weight: 600;
+        }
+
+        .promo-banner img {
+            width: 120px;
+        }
+
+        /* --- Footer --- */
+        .footer { background-color: var(--footer-pink); color: var(--text-dark); padding: 40px 0; font-size: 14px; margin-top: 40px; }
+        .footer-content { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 1fr; gap: 30px; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        .footer-column h3 { margin-bottom: 15px; font-size: 16px; font-weight: 700; }
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: 8px; }
+        .footer-column a { color: var(--text-dark); text-decoration: none; }
+        .social-icons { display: flex; gap: 10px; margin-top: 15px; }
+        .social-icon { width: 32px; height: 32px; background-color: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .social-icon img { width: 16px; height: 16px; filter: invert(1); }
+
+    </style>
+</head>
+<body>
+    
+    <div class="header-top">Get Rs:250 additional off on cart value of Rs:2999 and above</div>
+    <header class="header-main">
+        <img src="img/IMG_20250821_174843_910-removebg-preview.png" alt="BabyZone Logo" class="logo">
+        <div class="search-bar">
+            <input type="text" placeholder="Search here">
+            <button>🔍</button>
+        </div>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="forum.html">Forum</a>
+            <a href="parenting.html" class="active">Parenting classes</a>
+            <a href="login.html">Account ▼</a>
+            <a href="cart.html" class="cart-icon">
+                Cart 🛒
+                <span class="cart-count">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <nav class="category-nav">
+        <a href="#">All categories ▼</a>
+        <a href="fashion.html">Baby fashion ▼</a>
+        <a href="toys.html">Toys</a>
+        <a href="footwear.html">Footwear & Accessories ▼</a>
+        <a href="care.html">Moms & Baby care ▼</a>
+        <a href="furniture.html">Furniture & Bedding ▼</a>
+        <a href="rental.html">Rental Services</a>
+        <a href="#">Offers</a>
+    </nav>
+    
+    <div class="container main-content">
+        <p class="breadcrumbs">Home / Parenting classes</p>
+
+        <section class="carousel-section">
+            <h2 class="section-title">Online Classes</h2>
+            <div class="carousel-wrapper">
+                <div class="carousel-container" id="classes-carousel">
+                    <div class="class-card">
+                        <img src="img/istockphoto-498314915-612x612.jpg" alt="Child Development illustration">
+                        <div class="class-card-content">
+                             <div class="class-card-header"><h3>Child Development</h3><span class="duration-tag">10 Days</span></div>
+                            <p>Starts on 28/08/2025</p><button class="btn-join-class">Join class</button>
+                        </div>
+                    </div>
+                    <div class="class-card">
+                        <img src="img/istockphoto-1205505980-612x612.jpg" alt="Discipline illustration">
+                        <div class="class-card-content">
+                             <div class="class-card-header"><h3>Discipline</h3><span class="duration-tag">10 Days</span></div>
+                            <p>Starts on 29/08/2025</p><button class="btn-join-class">Join class</button>
+                        </div>
+                    </div>
+                    <div class="class-card">
+                        <img src="img/positive-parenting-strategies657d6d0623612.webp" alt="Parenting techniques">
+                        <div class="class-card-content">
+                            <div class="class-card-header"><h3>Parenting techniques</h3><span class="duration-tag">10 Days</span></div>
+                            <p>Starts on 30/08/2025</p><button class="btn-join-class">Join class</button>
+                        </div>
+                    </div>
+                    <div class="class-card">
+                        <img src="img/positive-parenting-6773e481438ac.png" alt="Parenting techniques illustration">
+                        <div class="class-card-content">
+                             <div class="class-card-header"><h3>Parenting techniques</h3><span class="duration-tag">30 Days</span></div>
+                            <p>Starts on 02/09/2025</p><button class="btn-join-class">Join class</button>
+                        </div>
+                    </div>
+                     <div class="class-card">
+                        <img src="img/istockphoto-1386217759-612x612.jpg" alt="Child Development illustration">
+                        <div class="class-card-content">
+                             <div class="class-card-header"><h3>Child Development</h3><span class="duration-tag">10 Days</span></div>
+                            <p>Starts on 28/08/2025</p><button class="btn-join-class">Join class</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-nav prev-btn" data-carousel="classes-carousel">❮</div>
+                <div class="carousel-nav next-btn" data-carousel="classes-carousel">❯</div>
+            </div>
+        </section>
+
+        <section class="carousel-section">
+            <h2 class="section-title">Workshops</h2>
+             <div class="carousel-wrapper">
+                <div class="carousel-container" id="workshops-carousel">
+                    <div class="workshop-card">
+                        <img src="img/360_F_191850653_IkzN9vZTtOtJ8NTKLKOp8PlaY8iCk6Ls.jpg" alt="Instructor for Child care">
+                        <h3>Child care</h3>
+                        <p>Contucted by James doe</p>
+                        <p>Senior Doctor</p>
+                        <p class="time">Wed, 28 Aug, 2025<br>Time: 10.00 Am - 1.00Pm</p>
+                        <button class="btn-join-class">Register</button>
+                    </div>
+                     <div class="workshop-card">
+                        <img src="img/beautiful-professional-woman-10497271.webp" alt="Instructor for First step with baby">
+                        <h3>First step with baby</h3>
+                        <p>Contucted by James doe</p>
+                        <p>Senior Doctor</p>
+                        <p class="time">Wed, 28 Aug, 2025<br>Time: 10.00 Am - 1.00Pm</p>
+                        <button class="btn-join-class">Register</button>
+                    </div>
+                     <div class="workshop-card">
+                        <img src="img/istockphoto-1386217759-612x612.jpg" alt="Instructor for The Art of Baby Handling">
+                        <h3>The Art of Baby Handling</h3>
+                        <p>Contucted by James doe</p>
+                        <p>Senior Doctor</p>
+                        <p class="time">Wed, 28 Aug, 2025<br>Time: 10.00 Am - 1.00Pm</p>
+                        <button class="btn-join-class">Register</button>
+                    </div>
+                    <div class="workshop-card">
+                         <img src="img/positive-parenting-strategies657d6d0623612.webp" alt="Instructor for Child care">
+                        <h3>Child care</h3>
+                        <p>Contucted by James doe</p>
+                        <p>Senior Doctor</p>
+                        <p class="time">Wed, 28 Aug, 2025<br>Time: 10.00 Am - 1.00Pm</p>
+                        <button class="btn-join-class">Register</button>
+                    </div>
+                </div>
+                <div class="carousel-nav prev-btn" data-carousel="workshops-carousel">❮</div>
+                <div class="carousel-nav next-btn" data-carousel="workshops-carousel">❯</div>
+            </div>
+        </section>
+
+        <div class="promo-banner">
+            <div class="promo-banner-text">
+                Free sign In to Join classes and Workshop now
+            </div>
+            <button class="btn-join-class" style="width: auto; padding: 10px 40px;">Register</button>
+            <img src="img/IMG_20250815_192820_540.jpg" alt="Mother with baby">
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column"><img src="img/IMG_20250821_174843_910-removebg-preview.png" alt="BabyZone Logo" class="logo" style="margin-bottom: 10px; width: 60px;"><p>4th street, pallavaram,<br>Near bus stand<br>Madurai-234567</p></div>
+             <div class="footer-column"><h3>Top categories</h3><ul><li><a href="#">Baby Fashion</a></li><li><a href="#">Toys</a></li><li><a href="#">Footwear & Accessories</a></li><li><a href="#">Moms & Baby care</a></li><li><a href="#">Furniture & Bedding</a></li><li><a href="#">Rental services</a></li></ul></div>
+            <div class="footer-column"><h3>Customer support</h3><ul><li><a href="#">Help & contact us</a></li><li><a href="#">Delivery information</a></li><li><a href="#">Track your order</a></li><li><a href="#">Returns & exchange</a></li></ul></div>
+            <div class="footer-column"><h3>Useful Links</h3><ul><li><a href="#">Store finder</a></li><li><a href="#">Sitemap</a></li><li><a href="#">Fees and payments policy</a></li></ul></div>
+            <div class="footer-column"><h3>About BabyZone</h3><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms & conditions</a></li></ul></div>
+            <div class="footer-column"><h3>Social Media</h3><div class="social-icons"><a href="#" class="social-icon"><img src="https://i.imgur.com/D4s2xtK.png" alt="facebook"></a><a href="#" class="social-icon"><img src="https://i.imgur.com/z4aJ2jH.png" alt="instagram"></a><a href="#" class="social-icon"><img src="https://i.imgur.com/bK0Lz5X.png" alt="twitter"></a><a href="#" class="social-icon"><img src="https://i.imgur.com/2A2qV2s.png" alt="youtube"></a></div></div>
+            <div class="footer-column"><h3>Social Media</h3><div class="social-icons">
+                <a href="#" class="social-icon" title="Facebook" style="background: none;">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="16" cy="16" r="16" fill="#3b5998"/>
+                        <path d="M21 16.5h-3v7h-3v-7h-2v-2.5h2v-1.5c0-2.1 1.2-3.5 3.3-3.5h2.7v2.5h-2c-.6 0-.7.2-.7.7v1.3h2.7L21 16.5z" fill="#fff"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-icon" title="Instagram" style="background: none;">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="16" cy="16" r="16" fill="#E4405F"/>
+                        <rect x="10" y="10" width="12" height="12" rx="4" fill="#fff"/>
+                        <circle cx="16" cy="16" r="3" fill="#E4405F"/>
+                        <circle cx="21" cy="11" r="1" fill="#E4405F"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-icon" title="Twitter" style="background: none;">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="16" cy="16" r="16" fill="#1da1f2"/>
+                        <path d="M24 13.1c-.5.2-1 .4-1.6.5.6-.4 1-1 1.2-1.7-.5.3-1.1.6-1.7.7-.5-.5-1.2-.9-2-0.9-1.5 0-2.6 1.4-2.3 2.8-2-.1-3.8-1-5-2.4-.2.4-.3.9-.3 1.3 0 1 .5 1.8 1.3 2.3-.5 0-.9-.2-1.3-.4v.1c0 1.4 1 2.5 2.3 2.8-.2.1-.5.1-.7.1-.2 0-.3 0-.5-.1.3 1 1.3 1.7 2.4 1.7-1 .8-2.2 1.3-3.5 1.3-.2 0-.4 0-.6-.1 1.2.8 2.6 1.3 4.1 1.3 4.9 0 7.6-4.1 7.6-7.6v-.3c.5-.3 1-.8 1.3-1.2z" fill="#fff"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-icon" title="YouTube" style="background: none;">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="16" cy="16" r="16" fill="#ff0000"/>
+                        <polygon points="13,11 23,16 13,21" fill="#fff"/>
+                    </svg>
+                </a>
+            </div></div>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function setupCarousel(carouselId) {
+                const carousel = document.getElementById(carouselId);
+                const prevBtn = document.querySelector(`.prev-btn[data-carousel="${carouselId}"]`);
+                const nextBtn = document.querySelector(`.next-btn[data-carousel="${carouselId}"]`);
+                
+                if (!carousel) return;
+
+                const cardWidth = carousel.querySelector('.class-card, .workshop-card').offsetWidth;
+                const scrollAmount = cardWidth + 20; // card width + gap
+                let autoScrollInterval;
+
+                nextBtn.addEventListener('click', () => {
+                    carousel.scrollLeft += scrollAmount;
+                });
+
+                prevBtn.addEventListener('click', () => {
+                    carousel.scrollLeft -= scrollAmount;
+                });
+
+                // --- AUTO-SCROLL FOR ONLINE CLASSES ---
+                if (carouselId === 'classes-carousel') {
+                    const startAutoScroll = () => {
+                       autoScrollInterval = setInterval(() => {
+                            // If scrolled to the end, loop back to the start
+                            if (carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth - 1)) {
+                                carousel.scrollLeft = 0;
+                            } else {
+                                carousel.scrollLeft += scrollAmount;
+                            }
+                        }, 3000); // Change slide every 3 seconds
+                    };
+
+                    startAutoScroll(); // Start the continuous scroll
+                }
+            }
+
+            setupCarousel('classes-carousel');
+            setupCarousel('workshops-carousel');
+        });
+    </script>
+</body>
+</html>
+
