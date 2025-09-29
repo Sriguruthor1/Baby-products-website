@@ -10,7 +10,7 @@
   function inferProductData(el){
     // Attempt to infer product details from data-* attributes or nearby DOM
     const data = {};
-    const srcEl = el.closest('[data-product]') || el.closest('.product') || el.closest('.card') || el;
+    const srcEl = el.closest('[data-product]') || el.closest('.product-card') || el.closest('.product') || el.closest('.card') || el;
     data.id = el.getAttribute('data-id') || srcEl?.getAttribute('data-id') || String(Date.now());
     data.name = el.getAttribute('data-name') || srcEl?.getAttribute('data-name') || (srcEl?.querySelector('.title, .name, h3, h4, .product-title')?.textContent?.trim()) || document.title || "Item";
     const priceAttr = el.getAttribute('data-price') || srcEl?.getAttribute('data-price') || (srcEl?.querySelector('.price, .product-price')?.textContent||"").replace(/[^0-9.]/g,'') || "0";
